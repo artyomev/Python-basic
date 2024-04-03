@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+
+  pg:
+    image: postgres
+    environment:
+      POSTGRES_DB: bill_split
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: example
+      PGDATA: /var/lib/postgres/data
+    volumes:
+      - db-data:/var/lib/postgres/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "bill_split", "-U", "user" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+
+  app:
+    build:
+      dockerfile: ./build/DockerFile
+      context: ./
+
+    command:
+      - flask
+      - run
+      - "--host=0.0.0.0"
+    environment:
+      SQLALCHEMY_DATABASE_URI: "postgresql+psycopg://user:example@pg:5432/bill_split"
+    ports:
+     - "5000:5000"
+    depends_on:
+      pg:
+        condition: service_healthy
+
+
+volumes:
+  db-data:

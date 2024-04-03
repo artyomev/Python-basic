@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}
+User # {{user.id}}
+{% endblock %}
+
+{% block body %}
+<h1>User #{{user.id}} - {{user.name}} details</h1>
+
+    {% include 'users/back-to-users-list.html' %}
+{% endblock %}

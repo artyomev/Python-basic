@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Purchases
+{% endblock %}
+
+{% block body %}
+<h1>Purchases</h1>
+{% if purchases %}
+<div class="list-group my-3">
+    {% for p in purchases %}
+         <a class="list-group-item link-primary list-group-item-action list-group-item-light"
+                href="{{ url_for('purchases_app.details', purchase_id = p.id) }}">
+            {{p.product_name}} cost - {{p.cost}}, Buyer - {{p.user.name}}
+        </a>
+    {% endfor %}
+</div>
+{%else%}
+   <h2>No purchases yet!</h2>
+  {% endif %}
+
+<div>
+    <a href=" {{ url_for('purchases_app.add') }}">Add new Purchase</a>
+</div>
+
+
+{% endblock %}
+

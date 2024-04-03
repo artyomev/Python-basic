@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Purchase # {{purchase.id}}
+{% endblock %}
+
+{% block body %}
+<h1>Purchase #{{purchase.id}} - {{purchase.product_name}} details</h1>
+<h3>Purchase cost - {{purchase.cost}}, Buyer - {{purchase.user.name}}</h3>
+    {% include 'purchases/back-to-purchases-list.html' %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Users
+{% endblock %}
+
+{% block body %}
+<h1>Users</h1>
+{% if users %}
+<div class="list-group my-3">
+    {% for u in users %}
+         <a class="list-group-item link-primary list-group-item-action list-group-item-light"
+                href="{{ url_for('users_app.details', user_id = u.id) }}">
+            {{u.name}}
+        </a>
+    {% endfor %}
+</div>
+{%else%}
+   <h2>No users yet!</h2>
+  {% endif %}
+
+<div>
+    <a href=" {{ url_for('users_app.add') }}">Add new User</a>
+</div>
+
+
+{% endblock %}
+

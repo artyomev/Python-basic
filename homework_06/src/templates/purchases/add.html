@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create new purchase
+{% endblock %}
+
+{% block body %}
+<h1>Create new user</h1>
+    <form  method="POST" >
+        {{ form.csrf_token }}
+        <p>
+            {{ form.product_name.label }}
+            {{ form.product_name }}
+        </p>
+
+        <ul class ="errors">
+            {% for error in form.product_name.errors %}
+            <li style="color:red;">{{ error }}</li>
+            {% endfor %}
+        </ul>
+
+        <p>
+             {{ form.cost.label }}
+             {{ form.cost}}
+        </p>
+
+        <ul class ="errors">
+            {% for error in form.cost.errors %}
+            <li style="color:red;">{{ error }}</li>
+            {% endfor %}
+        </ul>
+
+        <p>
+             {{ form.user.label  }}
+             {{ form.user }}
+        </p>
+
+        <ul class ="errors">
+            {% for error in form.user.errors %}
+            <li style="color:red;">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value = "Add">
+    </form>
+{% include 'purchases/back-to-purchases-list.html' %}
+{% endblock %}
